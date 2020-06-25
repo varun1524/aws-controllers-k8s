@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  start-service-controller:
+  - apiVersion: v2
+    appVersion: v1alpha1
+    created: "2020-06-19T13:26:20.270739-07:00"
+    description: A Helm chart for starting all service controllers for ACK
+    digest: 5e0fbe1fe1f5a8e1f15b0b119885908200e55cc44a19d611161e5a0fe3b0efb0
+    name: start-service-controller
+    type: application
+    urls:
+    - https://varun1524.github.io/aws-service-operator-k8s/helm/charts/start-service-controller-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-06-19T13:26:20.269751-07:00"

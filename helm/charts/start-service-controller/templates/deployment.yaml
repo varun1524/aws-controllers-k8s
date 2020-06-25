@@ -1,0 +1,22 @@
+#TODO: Add serviceAccount that uses IRSA
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-k8s-{{.Values.ackServiceAlias}}-controller
+  labels:
+    app: aws-k8s-{{.Values.ackServiceAlias}}-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aws-k8s-{{.Values.ackServiceAlias}}-controller
+  template:
+    metadata:
+      labels:
+        app: aws-k8s-{{.Values.ackServiceAlias}}-controller
+    spec:
+      containers:
+        - name: aws-k8s-{{.Values.ackServiceAlias}}-controller
+          image: {{.Values.ackServiceControllerImage}}
+          ports:
+            - containerPort: 80
