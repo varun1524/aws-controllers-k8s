@@ -16,6 +16,8 @@ ensure_service_controller_running() {
   echo "Ensuring that service controller $__service are running for given version"
 
   ./scripts/generate-crds.sh "$__service_path" "$__crd_path"
+  kubectl apply -f "$__crd_path"
+
   for f in "$__service_path"/*; do
     if [ "$f" = "$__service_path/Dockerfile" ]; then
       __ack_image_tag="$__service"-"$__image_version"
@@ -23,11 +25,8 @@ ensure_service_controller_running() {
     fi
   done
 
-  kubectl apply -f "$__crd_path"
-
   echo "Installing/Upgrading helm chart"
-  #TODO: Update it to deploy for one service
-  ensure_helm_chart_installed "$__image_version"
+  ensure_helm_chart_installed "$__service" "$__image_version"
   # Wait between two tests for old controllers to be replaced.
   # Using kubectl wait is a little tricky for this terminating condition,
   # as there are race condition if controller is deleted before wait command.
