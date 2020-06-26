@@ -12,7 +12,7 @@ references:
     GO111MODULE: "on"
   filters: &branchfilters
     branches:
-      only: mvp
+      only: e2etest
 
 jobs:
   unit_tests:
