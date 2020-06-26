@@ -21,6 +21,8 @@ source "$DIR"/lib/k8s.sh
 pwd
 ls
 
+git log -1
+
 # Variables used in /lib/aws.sh
 OS=$(go env GOOS)
 ARCH=$(go env GOARCH)
