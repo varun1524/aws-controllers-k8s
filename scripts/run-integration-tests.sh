@@ -8,12 +8,18 @@ set -Euo pipefail
 
 trap 'on_error $LINENO' ERR
 
+pwd
+ls
+
 DIR=$(cd "$(dirname "$0")"; pwd)
 source "$DIR"/lib/common.sh
 source "$DIR"/lib/aws.sh
 source "$DIR"/lib/cluster.sh
 source "$DIR"/lib/helm.sh
 source "$DIR"/lib/k8s.sh
+
+pwd
+ls
 
 # Variables used in /lib/aws.sh
 OS=$(go env GOOS)
@@ -190,11 +196,12 @@ else
   echo "Running integration test setup on Latest Commit, $TEST_IMAGE_VERSION"
   echo ""
 
-  __ack_source_tmpdir="/tmp/ack-src-$TEST_IMAGE_VERSION"
-  echo "Checking out ack source code for $TEST_IMAGE_VERSION ..."
-  git clone --depth=1 --branch e2etest git@github.com:varun1524/aws-service-operator-k8s.git "$__ack_source_tmpdir" || exit 1
-
-  pushd "$__ack_source_tmpdir" || exit
+#  __ack_source_tmpdir="/tmp/ack-src-$TEST_IMAGE_VERSION"
+#  echo "Checking out ack source code for $TEST_IMAGE_VERSION ..."
+##  git clone --depth=1 --branch e2etest git@github.com:varun1524/aws-service-operator-k8s.git "$__ack_source_tmpdir" || exit 1
+##  git clone --depth=1 --branch $TEST_IMAGE_VERSION git@github.com:varun1524/aws-service-operator-k8s.git "$__ack_source_tmpdir" || exit 1
+#
+#  pushd "$__ack_source_tmpdir" || exit
 
   for d in ./services/*; do
     if [ -d "$d" ]; then
@@ -225,7 +232,7 @@ else
   echo "Integration Testing on Commit $TEST_IMAGE_VERSION Finished"
   echo ""
 
-  popd
+#  popd
 
 fi
 
